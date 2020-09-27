@@ -1,1 +1,1 @@
-Repository for pyton challenge submission
+Repository for python challenge submission
