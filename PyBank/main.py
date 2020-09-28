@@ -49,8 +49,27 @@ with open(csvpath) as csvfile:
     min_month=Months[pnl_change.index(max_loss)]
     print(min_month)
 
-    #print results
-    
+#print results
+print("Financial Analysis")
+print("--------------------------")
+print(f"Total Months: {sum_months}")
+print(f"Total: {net_pnl}")
+print(f"Average  Change: ${avg_pnl}")
+print(f"Greatest Increase in Profits: {max_month} ${max_profit}")
+print(f"Greatest Decrease in Profits: {min_month} ${max_loss}")
+
+#export text file
+output_path=os.path.join("Analysis","Fiancial_Analysis.csv")
+with open(output_path,'w') as csvfile2:
+    csvwriter=csv.writer(csvfile2,delimiter=',')
+    csvwriter.writerow(['Financial Analysis'])
+    csvwriter.writerow(['-------------------------'])
+    csvwriter.writerow(['Total Months: ',sum_months])
+    csvwriter.writerow(['Total: $',net_pnl])
+    csvwriter.writerow(['Average Change: $',avg_pnl])
+    csvwriter.writerow(['Greatest Increase in Profits: ',max_month,max_profit])
+    csvwriter.writerow(['Greatest Decrease in Profits: ',min_month,max_loss])
+
 
 
 
