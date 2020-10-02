@@ -3,8 +3,7 @@ import csv
 
 #create blank lists for data
 Months=[]
-pnl_change=[]
-mydict={}
+pnl=[]
 
 #read CSV file
 csvpath=os.path.join('Resources','03-Python_Homework_Instructions_PyBank_Resources_budget_data.csv')
@@ -15,40 +14,40 @@ with open(csvpath) as csvfile:
     csv_header=next(csvreader)
     for row in csvreader:
         Months.append(row[0])
-        pnl_change.append(int(row[1]))
+        pnl.append(int(row[1]))
+        
 
     #calculate total months
     sum_months=len(Months)
-    print(sum_months)
-
+   
     #calculate net profit/loss over period
-    net_pnl=sum(pnl_change)
-    print(net_pnl)
-
+    net_pnl=sum(pnl)
+    
     #calculate avg of pnl changes over period
+
+    pnl_change=[]
+    for i in range(len(pnl)-1):
+        pnl_change.append(pnl[i+1]-pnl[i])
+   
+    sum_pnl_change=sum(pnl_change)
+    
     def Average(sum,length):
         return(sum/length)
-    avg_pnl=Average(net_pnl,sum_months)
-    print(avg_pnl)
+    avg_pnl=Average(sum_pnl_change,sum_months-1)
+    
 
     #calculate greatest increase
     max_profit=max(pnl_change)
-    print(max_profit)
-
+    
     #calculate greatest loss
     max_loss=min(pnl_change)
-    print(max_loss)
-
+    
     #find month of max profit
-    print(pnl_change.index(max_profit))
-    max_month=Months[pnl_change.index(max_profit)]
-    print(max_month)
-
+    max_month=Months[(pnl_change.index(max_profit))+1]
+    
     #find month of max loss
-    print(pnl_change.index(max_loss))
-    min_month=Months[pnl_change.index(max_loss)]
-    print(min_month)
-
+    min_month=Months[(pnl_change.index(max_loss))+1]
+    
 #print results
 print("Financial Analysis")
 print("--------------------------")
